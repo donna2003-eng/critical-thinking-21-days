@@ -151,7 +151,7 @@ export default function HomeClient() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4">
-        <section className="relative flex min-h-[90svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-4 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
+        <section className="relative flex min-h-[74svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-6 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
           <div className="relative z-10">
@@ -320,12 +320,12 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-10 mt-auto flex justify-center pt-4">
+    <div className="relative z-10 flex justify-center pt-8">
       <img
         alt="共学讨论"
-        className="h-auto w-[185%] max-w-none object-contain"
+        className="h-auto w-full max-w-[360px] object-contain"
         onError={() => setVisible(false)}
-        src="/cover-people.png?v=hero3"
+        src="/cover-people.png?v=hero4"
       />
     </div>
   );

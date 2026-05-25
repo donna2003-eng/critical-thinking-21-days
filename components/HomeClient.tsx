@@ -151,7 +151,7 @@ export default function HomeClient() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4 sm:max-w-2xl md:max-w-5xl md:px-6">
-        <section className="relative overflow-hidden rounded-[28px] bg-white px-6 pb-4 pt-6 shadow-[0_20px_70px_rgba(26,87,170,0.10)] md:px-10 md:pt-9">
+        <section className="relative min-h-[92svh] overflow-hidden rounded-[28px] bg-white px-6 pb-0 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)] md:px-10 md:pt-10">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
           <div className="relative z-10 flex items-start justify-between gap-4">
@@ -168,20 +168,22 @@ export default function HomeClient() {
 
           <CoverImageSlot />
 
-          <div className="relative z-10 mt-1 grid gap-2.5">
-            {coverActions.map((action) => (
-              <button
-                className="focus-ring group flex min-h-[60px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_12px_26px_rgba(17,70,140,0.10)] transition hover:-translate-y-0.5"
-                key={action.id}
-                onClick={() => scrollToSection(action.id)}
-                type="button"
-              >
-                <span className="min-w-0 flex-1 whitespace-nowrap text-[clamp(1.15rem,5.4vw,1.45rem)] font-black leading-none text-[#081747]">{action.label}</span>
-                <span className="text-3xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">›</span>
-              </button>
-            ))}
-          </div>
+
         </section>
+
+        <div className="relative z-10 mt-4 grid gap-3 pb-2">
+          {coverActions.map((action) => (
+            <button
+              className="focus-ring group flex min-h-[64px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_12px_26px_rgba(17,70,140,0.10)] transition hover:-translate-y-0.5"
+              key={action.id}
+              onClick={() => scrollToSection(action.id)}
+              type="button"
+            >
+              <span className="min-w-0 flex-1 whitespace-nowrap text-[clamp(1.15rem,5.4vw,1.45rem)] font-black leading-none text-[#081747]">{action.label}</span>
+              <span className="text-3xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">›</span>
+            </button>
+          ))}
+        </div>
 
         <div className="mt-5">
           <ProfileGate onReady={setProfile} />
@@ -319,10 +321,10 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-10 mt-1 flex justify-center">
+    <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center px-1">
       <img
         alt="共学讨论"
-        className="h-auto w-full max-w-[360px] object-contain"
+        className="h-auto w-[152%] max-w-[620px] object-contain sm:w-full"
         onError={() => setVisible(false)}
         src="/cover-people.png"
       />

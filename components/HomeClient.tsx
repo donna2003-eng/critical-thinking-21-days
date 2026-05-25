@@ -157,11 +157,11 @@ export default function HomeClient() {
           <div className="relative z-10 flex items-start justify-between gap-4">
             <div>
               <p className="text-[clamp(1.45rem,7vw,2.8rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
-              <h1 className="mt-1 text-[clamp(2.7rem,12vw,5rem)] font-black leading-[0.82] tracking-normal text-black">21天</h1>
-              <p className="mt-1 whitespace-nowrap text-[clamp(2.65rem,12.3vw,5.4rem)] font-black leading-[0.92] text-[#1164f4]">批判性思维</p>
-              <p className="mt-1 text-[clamp(1.8rem,8.2vw,3.5rem)] font-black leading-none text-black">养成计划</p>
-              <span className="mt-2 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
-              <p className="mt-2 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
+              <h1 className="mt-2 text-[clamp(2.7rem,12vw,5rem)] font-black leading-[0.86] tracking-normal text-black">21天</h1>
+              <p className="mt-2 whitespace-nowrap text-[clamp(2.65rem,12.3vw,5.4rem)] font-black leading-[0.96] text-[#1164f4]">批判性思维</p>
+              <p className="mt-2 text-[clamp(1.8rem,8.2vw,3.5rem)] font-black leading-none text-black">养成计划</p>
+              <span className="mt-3 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
+              <p className="mt-3 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
             </div>
             <CoverMagnifier />
           </div>

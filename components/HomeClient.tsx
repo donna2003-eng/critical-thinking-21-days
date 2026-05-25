@@ -14,9 +14,9 @@ function formatTime(value: string) {
 }
 
 const coverActions = [
-  { id: "signup-section", label: "共学时间接龙", hint: "选择时间 · 收集期待", icon: "calendar" },
-  { id: "content-section", label: "工具方法与案例", hint: "掌握方法 · 提升思考力", icon: "tool" },
-  { id: "topic-section", label: "争议话题与困扰", hint: "提出问题 · 交流观点", icon: "chat" }
+  { id: "signup-section", label: "共学时间接龙" },
+  { id: "content-section", label: "工具方法与案例" },
+  { id: "topic-section", label: "争议话题与困扰" }
 ];
 
 function scrollToSection(id: string) {
@@ -151,7 +151,7 @@ export default function HomeClient() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4 sm:max-w-2xl md:max-w-5xl md:px-6">
-        <section className="relative overflow-hidden rounded-[34px] border border-blue-100 bg-white px-6 pb-7 pt-9 shadow-[0_20px_70px_rgba(26,87,170,0.12)] md:px-10 md:pt-12">
+        <section className="relative overflow-hidden rounded-[34px] bg-white px-6 pb-7 pt-9 shadow-[0_20px_70px_rgba(26,87,170,0.10)] md:px-10 md:pt-12">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
           <div className="relative z-10 flex items-start justify-between gap-4">
@@ -166,21 +166,17 @@ export default function HomeClient() {
             <CoverMagnifier />
           </div>
 
-          <CoverConversation />
+          <CoverImageSlot />
 
           <div className="relative z-10 mt-7 grid gap-4">
             {coverActions.map((action) => (
               <button
-                className="focus-ring group flex min-h-[92px] items-center gap-4 rounded-[22px] border border-blue-100 bg-white px-5 text-left shadow-[0_18px_38px_rgba(17,70,140,0.12)] transition hover:-translate-y-0.5 hover:border-[#1164f4]/35"
+                className="focus-ring group flex min-h-[76px] items-center justify-between gap-3 rounded-[22px] bg-white px-6 text-left shadow-[0_18px_38px_rgba(17,70,140,0.12)] transition hover:-translate-y-0.5"
                 key={action.id}
                 onClick={() => scrollToSection(action.id)}
                 type="button"
               >
-                <CoverIcon type={action.icon} />
-                <span className="min-w-0 flex-1">
-                  <span className="block text-xl font-black leading-tight text-[#081747]">{action.label}</span>
-                  <span className="mt-1 block text-sm font-semibold leading-5 text-[#6f789c]">{action.hint}</span>
-                </span>
+                <span className="min-w-0 flex-1 whitespace-nowrap text-[clamp(1.25rem,6vw,1.55rem)] font-black leading-none text-[#081747]">{action.label}</span>
                 <span className="text-4xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">›</span>
               </button>
             ))}
@@ -318,35 +314,19 @@ function CoverMagnifier() {
   );
 }
 
-function CoverConversation() {
-  const people = [
-    { skin: "#f2c8a8", hair: "#151515", shirt: "#165a9f", bubble: "..." },
-    { skin: "#f4c7a6", hair: "#111111", shirt: "#ffffff", bubble: "?" },
-    { skin: "#f2f2f2", hair: "#f5f5f5", shirt: "#1164f4", bubble: "⌕", center: true },
-    { skin: "#6f4634", hair: "#0d0d0d", shirt: "#155a9b", bubble: "?" },
-    { skin: "#f0bd91", hair: "#9a4f24", shirt: "#d8ebff", bubble: "..." }
-  ];
+function CoverImageSlot() {
+  const [visible, setVisible] = useState(true);
+  if (!visible) return null;
 
   return (
-    <div className="relative z-10 mt-9 flex items-end justify-center gap-1 sm:gap-3" aria-hidden="true">
-      {people.map((person, index) => (
-        <div className={'relative flex w-[18%] max-w-[82px] flex-col items-center ' + (person.center ? "translate-y-1" : "")} key={index}>
-          <div className="mb-2 rounded-full bg-blue-50 px-3 py-1.5 text-lg font-black text-[#1164f4] shadow-sm">{person.bubble}</div>
-          <div className="h-12 w-12 rounded-full border-2 border-white shadow-md" style={{ background: person.skin }}>
-            <div className="mx-auto mt-1 h-4 w-9 rounded-t-full" style={{ background: person.hair }} />
-          </div>
-          <div className="mt-[-2px] h-16 w-full rounded-t-[36px] border border-white/70 shadow-[0_12px_28px_rgba(21,56,102,0.16)]" style={{ background: person.shirt }} />
-        </div>
-      ))}
+    <div className="relative z-10 mt-8 overflow-hidden rounded-[28px] bg-gradient-to-b from-sky-50 to-white shadow-[inset_0_0_0_1px_rgba(17,100,244,0.06)]">
+      <img
+        alt="共学讨论"
+        className="h-auto w-full object-cover"
+        onError={() => setVisible(false)}
+        src="/cover-people.png"
+      />
     </div>
-  );
-}
-
-function CoverIcon({ type }: { type: string }) {
-  return (
-    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-[4px] border-[#1164f4] text-3xl font-black text-[#1164f4]">
-      {type === "calendar" ? "日" : type === "tool" ? "!" : "?"}
-    </span>
   );
 }
 

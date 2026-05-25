@@ -16,15 +16,15 @@ function formatTime(value: string) {
 type HomeView = "home" | "signup" | "contents" | "topics";
 
 const coverActions = [
-  { href: "/signup", label: "??????" },
-  { href: "/contents", label: "???????" },
-  { href: "/topics", label: "???????" }
+  { href: "/signup", label: "共学时间接龙" },
+  { href: "/contents", label: "工具方法与案例" },
+  { href: "/topics", label: "争议话题与困扰" }
 ];
 
 const pageTitles: Record<Exclude<HomeView, "home">, string> = {
-  signup: "??????",
-  contents: "???????",
-  topics: "???????"
+  signup: "共学时间接龙",
+  contents: "工具方法与案例",
+  topics: "争议话题与困扰"
 };
 
 export default function HomeClient({ view = "home" }: { view?: HomeView }) {
@@ -193,7 +193,7 @@ export default function HomeClient({ view = "home" }: { view?: HomeView }) {
               href={action.href}
             >
               <span className="min-w-0 flex-1 whitespace-nowrap text-[clamp(1.15rem,5.4vw,1.45rem)] font-black leading-none text-[#081747]">{action.label}</span>
-              <span className="text-3xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">?</span>
+              <span className="text-3xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">&gt;</span>
             </Link>
           ))}
         </div>

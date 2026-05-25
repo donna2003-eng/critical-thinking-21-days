@@ -13,18 +13,21 @@ function formatTime(value: string) {
   return new Date(value).toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
 
+type HomeView = "home" | "signup" | "contents" | "topics";
+
 const coverActions = [
-  { id: "signup-section", label: "共学时间接龙" },
-  { id: "content-section", label: "工具方法与案例" },
-  { id: "topic-section", label: "争议话题与困扰" }
+  { href: "/signup", label: "??????" },
+  { href: "/contents", label: "???????" },
+  { href: "/topics", label: "???????" }
 ];
 
-function scrollToSection(id: string) {
-  const target = document.getElementById(id);
-  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+const pageTitles: Record<Exclude<HomeView, "home">, string> = {
+  signup: "??????",
+  contents: "???????",
+  topics: "???????"
+};
 
-export default function HomeClient() {
+export default function HomeClient({ view = "home" }: { view?: HomeView }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [signups, setSignups] = useState<Signup[]>([]);
   const [contents, setContents] = useState<CourseContent[]>([]);
@@ -148,9 +151,19 @@ export default function HomeClient() {
     }
   }
 
+  const isHome = view === "home";
+
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4">
+        {!isHome && (
+          <div className="mb-4 rounded-[22px] bg-white px-2 py-3">
+            <Link className="text-sm font-semibold text-[#1164f4]" href="/">? ????</Link>
+            <h1 className="mt-3 text-3xl font-black text-ink">{pageTitles[view]}</h1>
+          </div>
+        )}
+
+        {isHome && (
         <section className="relative flex min-h-[96svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-12 pt-8 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
@@ -169,27 +182,32 @@ export default function HomeClient() {
 
 
         </section>
+        )}
 
+        {isHome && (
         <div className="relative z-10 mt-10 grid gap-3 pb-2">
           {coverActions.map((action) => (
-            <button
+            <Link
               className="focus-ring group flex min-h-[64px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_12px_26px_rgba(17,70,140,0.10)] transition hover:-translate-y-0.5"
-              key={action.id}
-              onClick={() => scrollToSection(action.id)}
-              type="button"
+              key={action.href}
+              href={action.href}
             >
               <span className="min-w-0 flex-1 whitespace-nowrap text-[clamp(1.15rem,5.4vw,1.45rem)] font-black leading-none text-[#081747]">{action.label}</span>
-              <span className="text-3xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">›</span>
-            </button>
+              <span className="text-3xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">?</span>
+            </Link>
           ))}
         </div>
+        )}
 
-        <div className="mt-5">
-          <ProfileGate onReady={setProfile} />
-        </div>
+        {!isHome && (
+          <div className="mt-5">
+            <ProfileGate onReady={setProfile} />
+          </div>
+        )}
 
-        {profile && (
+        {profile && !isHome && (
           <div className="mt-5 grid gap-5 pb-10 md:gap-7">
+            {view === "signup" && (
             <section id="signup-section" className="scroll-mt-4 grid gap-5 rounded-[22px] border border-ink/10 bg-white p-5 shadow-soft">
               <div>
                 <p className="text-sm font-semibold text-clay">板块一</p>
@@ -238,7 +256,9 @@ export default function HomeClient() {
                 </div>
               )}
             </section>
+            )}
 
+            {view === "contents" && (
             <section id="content-section" className="scroll-mt-4 grid gap-5 rounded-[22px] border border-ink/10 bg-white p-5 shadow-soft">
               <div>
                 <p className="text-sm font-semibold text-tea">板块二</p>
@@ -254,7 +274,9 @@ export default function HomeClient() {
                 />
               ))}
             </section>
+            )}
 
+            {view === "topics" && (
             <section id="topic-section" className="scroll-mt-4 grid gap-5 rounded-[22px] border border-ink/10 bg-white p-5 shadow-soft">
               <div>
                 <p className="text-sm font-semibold text-tea">板块三</p>
@@ -293,6 +315,7 @@ export default function HomeClient() {
                 />
               ))}
             </section>
+            )}
           </div>
         )}
       </div>

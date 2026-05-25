@@ -151,27 +151,27 @@ export default function HomeClient() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4 sm:max-w-2xl md:max-w-5xl md:px-6">
-        <section className="relative overflow-hidden rounded-[28px] bg-white px-6 pb-5 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)] md:px-10 md:pt-10">
+        <section className="relative overflow-hidden rounded-[28px] bg-white px-6 pb-4 pt-6 shadow-[0_20px_70px_rgba(26,87,170,0.10)] md:px-10 md:pt-9">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
           <div className="relative z-10 flex items-start justify-between gap-4">
             <div>
-              <p className="text-[clamp(1.7rem,8.5vw,3.3rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
-              <h1 className="mt-2 text-[clamp(3.2rem,15vw,6rem)] font-black leading-[0.82] tracking-normal text-black">21天</h1>
-              <p className="mt-2 text-[clamp(3rem,15.5vw,6.2rem)] font-black leading-[0.92] text-[#1164f4]">批判性思维</p>
-              <p className="mt-2 text-[clamp(2rem,9.5vw,4rem)] font-black leading-none text-black">养成计划</p>
-              <span className="mt-3 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
-              <p className="mt-3 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
+              <p className="text-[clamp(1.45rem,7vw,2.8rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
+              <h1 className="mt-1 text-[clamp(2.7rem,12vw,5rem)] font-black leading-[0.82] tracking-normal text-black">21天</h1>
+              <p className="mt-1 whitespace-nowrap text-[clamp(2.65rem,12.3vw,5.4rem)] font-black leading-[0.92] text-[#1164f4]">批判性思维</p>
+              <p className="mt-1 text-[clamp(1.8rem,8.2vw,3.5rem)] font-black leading-none text-black">养成计划</p>
+              <span className="mt-2 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
+              <p className="mt-2 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
             </div>
             <CoverMagnifier />
           </div>
 
           <CoverImageSlot />
 
-          <div className="relative z-10 mt-3 grid gap-3">
+          <div className="relative z-10 mt-1 grid gap-2.5">
             {coverActions.map((action) => (
               <button
-                className="focus-ring group flex min-h-[64px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_14px_30px_rgba(17,70,140,0.11)] transition hover:-translate-y-0.5"
+                className="focus-ring group flex min-h-[60px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_12px_26px_rgba(17,70,140,0.10)] transition hover:-translate-y-0.5"
                 key={action.id}
                 onClick={() => scrollToSection(action.id)}
                 type="button"
@@ -319,10 +319,10 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-10 mt-3 flex justify-center">
+    <div className="relative z-10 mt-1 flex justify-center">
       <img
         alt="共学讨论"
-        className="h-auto w-full max-w-[350px] object-contain"
+        className="h-auto w-full max-w-[360px] object-contain"
         onError={() => setVisible(false)}
         src="/cover-people.png"
       />

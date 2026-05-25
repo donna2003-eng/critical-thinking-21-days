@@ -151,7 +151,7 @@ export default function HomeClient() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4">
-        <section className="relative flex min-h-[92svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-10 pt-8 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
+        <section className="relative flex min-h-[96svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-12 pt-8 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
           <div className="relative z-10">
@@ -170,7 +170,7 @@ export default function HomeClient() {
 
         </section>
 
-        <div className="relative z-10 mt-8 grid gap-3 pb-2">
+        <div className="relative z-10 mt-10 grid gap-3 pb-2">
           {coverActions.map((action) => (
             <button
               className="focus-ring group flex min-h-[64px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_12px_26px_rgba(17,70,140,0.10)] transition hover:-translate-y-0.5"
@@ -320,12 +320,12 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-10 flex flex-1 items-start justify-center pt-12">
+    <div className="relative z-10 flex flex-1 items-start justify-center pt-14">
       <img
         alt="共学讨论"
-        className="h-auto w-full max-w-[390px] object-contain"
+        className="h-auto w-[108%] max-w-[410px] object-contain"
         onError={() => setVisible(false)}
-        src="/cover-people.png?v=hero5"
+        src="/cover-people.png?v=hero6"
       />
     </div>
   );

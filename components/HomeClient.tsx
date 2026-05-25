@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
@@ -11,6 +11,17 @@ import type { ContentComment, CourseContent, Profile, Signup, Topic, TopicCatego
 
 function formatTime(value: string) {
   return new Date(value).toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+}
+
+const coverActions = [
+  { id: "signup-section", label: "共学时间接龙", hint: "选择时间 · 收集期待", icon: "calendar" },
+  { id: "content-section", label: "工具方法与案例", hint: "掌握方法 · 提升思考力", icon: "tool" },
+  { id: "topic-section", label: "争议话题与困扰", hint: "提出问题 · 交流观点", icon: "chat" }
+];
+
+function scrollToSection(id: string) {
+  const target = document.getElementById(id);
+  if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 export default function HomeClient() {
@@ -138,35 +149,61 @@ export default function HomeClient() {
   }
 
   return (
-    <main className="min-h-screen bg-paper">
-      <header className="border-b border-ink/10 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm font-semibold text-clay">21 天共学实验</p>
-            <h1 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight md:text-5xl">AI时代的21天批判性思维养成计划</h1>
-            <p className="mt-4 max-w-2xl leading-7 text-ink/70">把提问、辨析和表达放回日常。没有登录系统，没有图片视频上传，只有文本、同伴和一点点打开问题的勇气。</p>
+    <main className="min-h-screen bg-white text-ink">
+      <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4 sm:max-w-2xl md:max-w-5xl md:px-6">
+        <section className="relative overflow-hidden rounded-[34px] border border-blue-100 bg-white px-6 pb-7 pt-9 shadow-[0_20px_70px_rgba(26,87,170,0.12)] md:px-10 md:pt-12">
+          <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
+          <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
+          <div className="relative z-10 flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[clamp(2.25rem,13vw,4.7rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
+              <h1 className="mt-4 text-[clamp(4.5rem,25vw,9rem)] font-black leading-[0.82] tracking-normal text-black">21天</h1>
+              <p className="mt-5 text-[clamp(2.75rem,14vw,5.8rem)] font-black leading-[0.95] text-[#1164f4]">批判性思维</p>
+              <p className="mt-4 text-[clamp(2.25rem,11vw,4.6rem)] font-black leading-none text-black">养成计划</p>
+              <span className="mt-5 block h-1.5 w-16 rounded-full bg-[#1164f4]" />
+              <p className="mt-6 text-base font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
+            </div>
+            <CoverMagnifier />
           </div>
-          <Link className="focus-ring w-fit rounded-md border border-ink/15 px-4 py-2 text-sm font-semibold" href="/admin">
-            管理员入口
-          </Link>
-        </div>
-      </header>
 
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8">
-        <ProfileGate onReady={setProfile} />
+          <CoverConversation />
+
+          <div className="relative z-10 mt-7 grid gap-4">
+            {coverActions.map((action) => (
+              <button
+                className="focus-ring group flex min-h-[92px] items-center gap-4 rounded-[22px] border border-blue-100 bg-white px-5 text-left shadow-[0_18px_38px_rgba(17,70,140,0.12)] transition hover:-translate-y-0.5 hover:border-[#1164f4]/35"
+                key={action.id}
+                onClick={() => scrollToSection(action.id)}
+                type="button"
+              >
+                <CoverIcon type={action.icon} />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xl font-black leading-tight text-[#081747]">{action.label}</span>
+                  <span className="mt-1 block text-sm font-semibold leading-5 text-[#6f789c]">{action.hint}</span>
+                </span>
+                <span className="text-4xl font-black leading-none text-[#1164f4] transition group-hover:translate-x-1">›</span>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <div className="mt-5">
+          <ProfileGate onReady={setProfile} />
+        </div>
+
         {profile && (
-          <>
-            <section className="grid gap-6 rounded-lg border border-ink/10 bg-white p-5 shadow-soft">
+          <div className="mt-5 grid gap-5 pb-10 md:gap-7">
+            <section id="signup-section" className="scroll-mt-4 grid gap-5 rounded-[22px] border border-ink/10 bg-white p-5 shadow-soft">
               <div>
-                <p className="text-sm font-semibold text-tea">板块一</p>
-                <h2 className="mt-1 text-2xl font-semibold">共学时间接龙</h2>
+                <p className="text-sm font-semibold text-clay">板块一</p>
+                <h2 className="mt-1 text-2xl font-black">共学时间接龙</h2>
               </div>
               <div>
                 <h3 className="text-lg font-semibold">当前报名统计</h3>
-                <div className="mt-4 grid gap-3 md:grid-cols-7">
+                <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-7">
                   {stats.map((item) => (
-                    <div className="rounded-md border border-ink/10 bg-mist/40 p-3" key={item.day}>
-                      <div className="flex items-center justify-between">
+                    <div className="rounded-2xl border border-ink/10 bg-mist/40 p-3" key={item.day}>
+                      <div className="flex items-center justify-between gap-2">
                         <span className="font-semibold">{item.day}</span>
                         <span className="text-sm text-ink/60">{item.names.length} 人</span>
                       </div>
@@ -177,10 +214,10 @@ export default function HomeClient() {
               </div>
               <div className="border-t border-ink/10 pt-5">
                 <h3 className="text-lg font-semibold">用户填写区域</h3>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4 grid grid-cols-4 gap-2 sm:flex sm:flex-wrap">
                   {weekdays.map((day) => (
                     <button
-                      className={`focus-ring rounded-md border px-4 py-2 text-sm ${selectedDays.includes(day) ? "border-clay bg-clay/10 text-clay" : "border-ink/15 bg-white"}`}
+                      className={'focus-ring rounded-xl border px-3 py-3 text-sm font-semibold ' + (selectedDays.includes(day) ? "border-clay bg-clay/10 text-clay" : "border-ink/15 bg-white")}
                       key={day}
                       onClick={() => setSelectedDays((days) => (days.includes(day) ? days.filter((item) => item !== day) : [...days, day]))}
                       type="button"
@@ -189,14 +226,14 @@ export default function HomeClient() {
                     </button>
                   ))}
                 </div>
-                <textarea className="focus-ring mt-4 min-h-28 w-full rounded-md border border-ink/15 bg-white px-3 py-2" placeholder="对课程的疑问或期待（选填）" value={question} onChange={(event) => setQuestion(event.target.value)} maxLength={500} />
+                <textarea className="focus-ring mt-4 min-h-28 w-full rounded-2xl border border-ink/15 bg-white px-4 py-3" placeholder="对课程的疑问或期待（选填）" value={question} onChange={(event) => setQuestion(event.target.value)} maxLength={500} />
                 {message && <p className="mt-2 text-sm text-clay">{message}</p>}
-                <button className="focus-ring mt-3 rounded-md bg-ink px-5 py-2 text-sm font-semibold text-white" onClick={submitSignup} type="button">
+                <button className="focus-ring mt-3 w-full rounded-2xl bg-ink px-5 py-3 text-sm font-semibold text-white sm:w-auto" onClick={submitSignup} type="button">
                   提交
                 </button>
               </div>
               {blindOpen && (
-                <div id="blind-box" className="rounded-lg border border-clay/30 bg-[#fff8ed] p-5">
+                <div id="blind-box" className="rounded-[22px] border border-clay/30 bg-[#fff8ed] p-5">
                   <p className="text-sm font-semibold text-clay">盲盒知识已打开</p>
                   {blindLines.map((line) => (
                     <p className="mt-3 text-xl font-semibold leading-9" key={line}>{line}</p>
@@ -205,12 +242,12 @@ export default function HomeClient() {
               )}
             </section>
 
-            <section className="grid gap-5 rounded-lg border border-ink/10 bg-white p-5 shadow-soft">
+            <section id="content-section" className="scroll-mt-4 grid gap-5 rounded-[22px] border border-ink/10 bg-white p-5 shadow-soft">
               <div>
-                <p className="text-sm font-semibold text-tea">模块 2</p>
-                <h2 className="mt-1 text-2xl font-semibold">工具方法与案例区</h2>
+                <p className="text-sm font-semibold text-tea">板块二</p>
+                <h2 className="mt-1 text-2xl font-black">工具方法与案例</h2>
               </div>
-              {contents.length === 0 && <p className="rounded-md bg-mist/40 p-4 text-ink/65">管理员还没有发布内容。</p>}
+              {contents.length === 0 && <p className="rounded-2xl bg-mist/40 p-4 text-ink/65">管理员还没有发布内容。</p>}
               {contents.map((content) => (
                 <ContentCard
                   comments={contentComments.filter((comment) => comment.content_id === content.id)}
@@ -221,22 +258,22 @@ export default function HomeClient() {
               ))}
             </section>
 
-            <section className="grid gap-5 rounded-lg border border-ink/10 bg-white p-5 shadow-soft">
+            <section id="topic-section" className="scroll-mt-4 grid gap-5 rounded-[22px] border border-ink/10 bg-white p-5 shadow-soft">
               <div>
-                <p className="text-sm font-semibold text-tea">模块 3</p>
-                <h2 className="mt-1 text-2xl font-semibold">争议话题与困扰区</h2>
+                <p className="text-sm font-semibold text-tea">板块三</p>
+                <h2 className="mt-1 text-2xl font-black">争议话题与困扰</h2>
               </div>
               <form
-                className="grid gap-3 rounded-md border border-ink/10 bg-mist/30 p-4"
+                className="grid gap-3 rounded-2xl border border-ink/10 bg-mist/30 p-4"
                 onSubmit={(event) => {
                   event.preventDefault();
                   addTopic(event.currentTarget);
                 }}
               >
-                <input className="focus-ring rounded-md border border-ink/15 px-3 py-2" name="title" placeholder="标题" maxLength={80} />
-                <textarea className="focus-ring min-h-28 rounded-md border border-ink/15 px-3 py-2" name="body" placeholder="内容" maxLength={1200} />
-                <div className="flex flex-col gap-3 md:flex-row md:items-center">
-                  <select className="focus-ring rounded-md border border-ink/15 px-3 py-2" name="category" defaultValue="controversy">
+                <input className="focus-ring rounded-xl border border-ink/15 px-3 py-3" name="title" placeholder="标题" maxLength={80} />
+                <textarea className="focus-ring min-h-28 rounded-xl border border-ink/15 px-3 py-3" name="body" placeholder="内容" maxLength={1200} />
+                <div className="grid gap-3 sm:flex sm:items-center">
+                  <select className="focus-ring rounded-xl border border-ink/15 px-3 py-3" name="category" defaultValue="controversy">
                     {Object.entries(topicCategoryLabels).map(([value, label]) => (
                       <option key={value} value={value}>{label}</option>
                     ))}
@@ -245,7 +282,7 @@ export default function HomeClient() {
                     <input name="anonymous" type="checkbox" />
                     匿名发布
                   </label>
-                  <button className="focus-ring rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white md:ml-auto" type="submit">
+                  <button className="focus-ring rounded-xl bg-ink px-4 py-3 text-sm font-semibold text-white sm:ml-auto" type="submit">
                     发布话题
                   </button>
                 </div>
@@ -259,18 +296,65 @@ export default function HomeClient() {
                 />
               ))}
             </section>
-          </>
+          </div>
         )}
       </div>
+
+      <Link className="fixed right-4 top-4 z-20 rounded-full border border-ink/10 bg-white/90 px-3 py-2 text-xs font-semibold shadow-soft backdrop-blur" href="/admin">
+        管理员入口
+      </Link>
     </main>
+  );
+}
+
+function CoverMagnifier() {
+  return (
+    <div className="hidden shrink-0 pt-16 sm:block" aria-hidden="true">
+      <div className="relative h-36 w-36 rotate-[-16deg] rounded-full border-[12px] border-[#1164f4] bg-white shadow-[inset_0_0_0_5px_rgba(255,255,255,0.7),0_16px_32px_rgba(17,100,244,0.24)]">
+        <span className="absolute left-6 top-5 h-5 w-16 rotate-[-18deg] rounded-full bg-white/80" />
+        <span className="absolute -bottom-12 -right-9 h-20 w-7 rotate-[-42deg] rounded-full bg-[#1164f4] shadow-[0_14px_22px_rgba(17,100,244,0.24)]" />
+      </div>
+    </div>
+  );
+}
+
+function CoverConversation() {
+  const people = [
+    { skin: "#f2c8a8", hair: "#151515", shirt: "#165a9f", bubble: "..." },
+    { skin: "#f4c7a6", hair: "#111111", shirt: "#ffffff", bubble: "?" },
+    { skin: "#f2f2f2", hair: "#f5f5f5", shirt: "#1164f4", bubble: "⌕", center: true },
+    { skin: "#6f4634", hair: "#0d0d0d", shirt: "#155a9b", bubble: "?" },
+    { skin: "#f0bd91", hair: "#9a4f24", shirt: "#d8ebff", bubble: "..." }
+  ];
+
+  return (
+    <div className="relative z-10 mt-9 flex items-end justify-center gap-1 sm:gap-3" aria-hidden="true">
+      {people.map((person, index) => (
+        <div className={'relative flex w-[18%] max-w-[82px] flex-col items-center ' + (person.center ? "translate-y-1" : "")} key={index}>
+          <div className="mb-2 rounded-full bg-blue-50 px-3 py-1.5 text-lg font-black text-[#1164f4] shadow-sm">{person.bubble}</div>
+          <div className="h-12 w-12 rounded-full border-2 border-white shadow-md" style={{ background: person.skin }}>
+            <div className="mx-auto mt-1 h-4 w-9 rounded-t-full" style={{ background: person.hair }} />
+          </div>
+          <div className="mt-[-2px] h-16 w-full rounded-t-[36px] border border-white/70 shadow-[0_12px_28px_rgba(21,56,102,0.16)]" style={{ background: person.shirt }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function CoverIcon({ type }: { type: string }) {
+  return (
+    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-[4px] border-[#1164f4] text-3xl font-black text-[#1164f4]">
+      {type === "calendar" ? "日" : type === "tool" ? "!" : "?"}
+    </span>
   );
 }
 
 function ContentCard({ content, comments, onComment }: { content: CourseContent; comments: ContentComment[]; onComment: (id: string, body: string, reset: () => void) => void }) {
   const [body, setBody] = useState("");
   return (
-    <article className="rounded-md border border-ink/10 p-4">
-      <span className="rounded bg-tea/10 px-2 py-1 text-xs font-semibold text-tea">{contentTypeLabels[content.type]}</span>
+    <article className="rounded-2xl border border-ink/10 p-4">
+      <span className="rounded-full bg-tea/10 px-3 py-1 text-xs font-semibold text-tea">{contentTypeLabels[content.type]}</span>
       <h3 className="mt-3 text-xl font-semibold">{content.title}</h3>
       <p className="mt-3 whitespace-pre-wrap leading-7 text-ink/75">{content.body}</p>
       <div className="mt-5 grid gap-3 border-t border-ink/10 pt-4">
@@ -283,9 +367,9 @@ function ContentCard({ content, comments, onComment }: { content: CourseContent;
             </div>
           </div>
         ))}
-        <div className="flex gap-2">
-          <input className="focus-ring min-w-0 flex-1 rounded-md border border-ink/15 px-3 py-2 text-sm" value={body} onChange={(event) => setBody(event.target.value)} placeholder="写一条评论" maxLength={800} />
-          <button className="focus-ring rounded-md border border-ink/15 px-3 py-2 text-sm" onClick={() => onComment(content.id, body, () => setBody(""))} type="button">发送</button>
+        <div className="grid gap-2 sm:flex">
+          <input className="focus-ring min-w-0 flex-1 rounded-xl border border-ink/15 px-3 py-3 text-sm" value={body} onChange={(event) => setBody(event.target.value)} placeholder="写一条评论" maxLength={800} />
+          <button className="focus-ring rounded-xl border border-ink/15 px-4 py-3 text-sm font-semibold" onClick={() => onComment(content.id, body, () => setBody(""))} type="button">发送</button>
         </div>
       </div>
     </article>
@@ -296,13 +380,13 @@ function TopicCard({ topic, comments, onComment }: { topic: Topic; comments: Top
   const [body, setBody] = useState("");
   const [anonymous, setAnonymous] = useState(false);
   return (
-    <article className="rounded-md border border-ink/10 p-4">
+    <article className="rounded-2xl border border-ink/10 p-4">
       <div className="flex items-start justify-between gap-4">
         <div className="flex gap-3">
           {topic.is_anonymous ? <span className="h-10 w-10 rounded-full bg-ink/10" /> : <Avatar id={topic.avatar} />}
           <div>
             <p className="text-sm font-semibold">{topic.is_anonymous ? "匿名用户" : topic.nickname} <span className="font-normal text-ink/45">{formatTime(topic.created_at)}</span></p>
-            <span className="mt-1 inline-block rounded bg-clay/10 px-2 py-1 text-xs font-semibold text-clay">{topicCategoryLabels[topic.category]}</span>
+            <span className="mt-1 inline-block rounded-full bg-clay/10 px-3 py-1 text-xs font-semibold text-clay">{topicCategoryLabels[topic.category]}</span>
           </div>
         </div>
       </div>
@@ -318,13 +402,13 @@ function TopicCard({ topic, comments, onComment }: { topic: Topic; comments: Top
             </div>
           </div>
         ))}
-        <div className="grid gap-2 md:grid-cols-[1fr_auto_auto]">
-          <input className="focus-ring min-w-0 rounded-md border border-ink/15 px-3 py-2 text-sm" value={body} onChange={(event) => setBody(event.target.value)} placeholder="参与讨论" maxLength={800} />
+        <div className="grid gap-2 sm:grid-cols-[1fr_auto_auto]">
+          <input className="focus-ring min-w-0 rounded-xl border border-ink/15 px-3 py-3 text-sm" value={body} onChange={(event) => setBody(event.target.value)} placeholder="参与讨论" maxLength={800} />
           <label className="flex items-center gap-2 text-sm">
             <input checked={anonymous} onChange={(event) => setAnonymous(event.target.checked)} type="checkbox" />
             匿名评论
           </label>
-          <button className="focus-ring rounded-md border border-ink/15 px-3 py-2 text-sm" onClick={() => onComment(topic.id, body, anonymous, () => setBody(""))} type="button">发送</button>
+          <button className="focus-ring rounded-xl border border-ink/15 px-4 py-3 text-sm font-semibold" onClick={() => onComment(topic.id, body, anonymous, () => setBody(""))} type="button">发送</button>
         </div>
       </div>
     </article>

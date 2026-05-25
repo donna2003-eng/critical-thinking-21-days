@@ -150,20 +150,19 @@ export default function HomeClient() {
 
   return (
     <main className="min-h-screen bg-white text-ink">
-      <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4 sm:max-w-2xl md:max-w-5xl md:px-6">
-        <section className="relative min-h-[92svh] overflow-hidden rounded-[28px] bg-white px-6 pb-0 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)] md:px-10 md:pt-10">
+      <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4">
+        <section className="relative flex min-h-[90svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-4 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
-          <div className="relative z-10 flex items-start justify-between gap-4">
+          <div className="relative z-10">
             <div>
-              <p className="text-[clamp(1.45rem,7vw,2.8rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
-              <h1 className="mt-2 text-[clamp(2.7rem,12vw,5rem)] font-black leading-[0.86] tracking-normal text-black">21天</h1>
-              <p className="mt-2 whitespace-nowrap text-[clamp(2.65rem,12.3vw,5.4rem)] font-black leading-[0.96] text-[#1164f4]">批判性思维</p>
-              <p className="mt-2 text-[clamp(1.8rem,8.2vw,3.5rem)] font-black leading-none text-black">养成计划</p>
+              <p className="text-[clamp(1.55rem,7.4vw,2.2rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
+              <h1 className="mt-2 text-[clamp(3rem,14vw,4.2rem)] font-black leading-[0.86] tracking-normal text-black">21天</h1>
+              <p className="mt-2 whitespace-nowrap text-[clamp(2.65rem,12.2vw,3.75rem)] font-black leading-[0.96] text-[#1164f4]">批判性思维</p>
+              <p className="mt-2 text-[clamp(1.9rem,8.8vw,2.65rem)] font-black leading-none text-black">养成计划</p>
               <span className="mt-3 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
               <p className="mt-3 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
             </div>
-            <CoverMagnifier />
           </div>
 
           <CoverImageSlot />
@@ -321,12 +320,12 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center px-1">
+    <div className="relative z-10 mt-auto flex justify-center pt-4">
       <img
         alt="共学讨论"
-        className="h-auto w-[152%] max-w-[620px] object-contain sm:w-full"
+        className="h-auto w-[185%] max-w-none object-contain"
         onError={() => setVisible(false)}
-        src="/cover-people.png"
+        src="/cover-people.png?v=hero3"
       />
     </div>
   );

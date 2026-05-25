@@ -151,17 +151,17 @@ export default function HomeClient() {
   return (
     <main className="min-h-screen bg-white text-ink">
       <div className="mx-auto min-h-screen w-full max-w-[430px] px-4 py-4">
-        <section className="relative flex min-h-[74svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-6 pt-7 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
+        <section className="relative flex min-h-[92svh] flex-col overflow-hidden rounded-[28px] bg-white px-6 pb-10 pt-8 shadow-[0_20px_70px_rgba(26,87,170,0.10)]">
           <div className="pointer-events-none absolute -right-12 top-16 h-48 w-48 rounded-full bg-sky-100/70 blur-3xl" />
           <div className="pointer-events-none absolute -left-16 bottom-40 h-44 w-44 rounded-full bg-amber-100/60 blur-3xl" />
           <div className="relative z-10">
             <div>
               <p className="text-[clamp(1.55rem,7.4vw,2.2rem)] font-black leading-none text-[#1164f4]">AI时代的</p>
-              <h1 className="mt-2 text-[clamp(3rem,14vw,4.2rem)] font-black leading-[0.86] tracking-normal text-black">21天</h1>
-              <p className="mt-2 whitespace-nowrap text-[clamp(2.65rem,12.2vw,3.75rem)] font-black leading-[0.96] text-[#1164f4]">批判性思维</p>
-              <p className="mt-2 text-[clamp(1.9rem,8.8vw,2.65rem)] font-black leading-none text-black">养成计划</p>
-              <span className="mt-3 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
-              <p className="mt-3 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
+              <h1 className="mt-3 text-[clamp(3.15rem,14.8vw,4.35rem)] font-black leading-[0.9] tracking-normal text-black">21天</h1>
+              <p className="mt-3 whitespace-nowrap text-[clamp(2.65rem,12.1vw,3.75rem)] font-black leading-[1] text-[#1164f4]">批判性思维</p>
+              <p className="mt-3 text-[clamp(1.95rem,9vw,2.7rem)] font-black leading-none text-black">养成计划</p>
+              <span className="mt-5 block h-1.5 w-14 rounded-full bg-[#1164f4]" />
+              <p className="mt-5 text-sm font-semibold tracking-normal text-[#68769d] md:text-xl">质疑 · 分析 · 评估 · 洞察 · 表达</p>
             </div>
           </div>
 
@@ -170,7 +170,7 @@ export default function HomeClient() {
 
         </section>
 
-        <div className="relative z-10 mt-4 grid gap-3 pb-2">
+        <div className="relative z-10 mt-8 grid gap-3 pb-2">
           {coverActions.map((action) => (
             <button
               className="focus-ring group flex min-h-[64px] items-center justify-between gap-3 rounded-[18px] bg-white px-5 text-left shadow-[0_12px_26px_rgba(17,70,140,0.10)] transition hover:-translate-y-0.5"
@@ -320,12 +320,12 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-10 flex justify-center pt-8">
+    <div className="relative z-10 flex flex-1 items-start justify-center pt-12">
       <img
         alt="共学讨论"
-        className="h-auto w-full max-w-[360px] object-contain"
+        className="h-auto w-full max-w-[390px] object-contain"
         onError={() => setVisible(false)}
-        src="/cover-people.png?v=hero4"
+        src="/cover-people.png?v=hero5"
       />
     </div>
   );

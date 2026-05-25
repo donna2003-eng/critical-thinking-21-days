@@ -168,7 +168,7 @@ export default function HomeClient() {
 
           <CoverImageSlot />
 
-          <div className="relative z-10 mt-7 grid gap-4">
+          <div className="relative z-10 mt-4 grid gap-4">
             {coverActions.map((action) => (
               <button
                 className="focus-ring group flex min-h-[76px] items-center justify-between gap-3 rounded-[22px] bg-white px-6 text-left shadow-[0_18px_38px_rgba(17,70,140,0.12)] transition hover:-translate-y-0.5"
@@ -319,10 +319,10 @@ function CoverImageSlot() {
   if (!visible) return null;
 
   return (
-    <div className="relative z-10 mt-8 overflow-hidden rounded-[28px] bg-gradient-to-b from-sky-50 to-white shadow-[inset_0_0_0_1px_rgba(17,100,244,0.06)]">
+    <div className="relative z-10 mt-4 flex justify-center">
       <img
         alt="共学讨论"
-        className="h-auto w-full object-cover"
+        className="h-auto w-full max-w-[360px] object-contain"
         onError={() => setVisible(false)}
         src="/cover-people.png"
       />
